@@ -16,6 +16,7 @@
   "author": "thatguynapster",
   "license": "MIT",
   "dependencies": {
+    "@heroicons/react": "^1.0.4",
     "js-cookie": "^2.2.1",
     "next": "^10.0.3",
     "next-pwa": "^5.2.21",
