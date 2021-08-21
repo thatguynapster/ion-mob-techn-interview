@@ -17,6 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "@heroicons/react": "^1.0.4",
+    "@supabase/supabase-js": "^1.22.2",
+    "@xstate/react": "^1.5.1",
     "js-cookie": "^2.2.1",
     "next": "^10.0.3",
     "next-pwa": "^5.2.21",
@@ -25,7 +27,8 @@
     "react-dom": "^17.0.1",
     "react-toastify": "^6.1.0",
     "styled-components": "^5.2.1",
-    "swr": "^0.5.4"
+    "swr": "^0.5.4",
+    "xstate": "^4.23.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",
