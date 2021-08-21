@@ -60,6 +60,11 @@ Start the projects development server
 yarn dev
 ```
 
+For windows machines, use the following command to start the development server
+```bash
+yarn devwin
+```
+
 The project should now be available at http://localhost:4800
 
 ## Environment Variables
@@ -76,7 +81,7 @@ These are the environment variables required to successfully deploy the applicat
 
 Details of the tech stack that has been used.
 
-- [NextJS](https://nextjs.org/) - Client Framework
+- [NextJS](https://nextjs.org/) - Development Framework
 - [Tailwind](https://tailwindcss.com/) - CSS Framework
 - [Typescript](https://www.typescriptlang.org/) - Development Language
 
