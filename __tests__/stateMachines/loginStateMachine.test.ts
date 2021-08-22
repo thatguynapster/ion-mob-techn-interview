@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import loginMachine from '../../stateMachines/loginStateMachine'
 
 

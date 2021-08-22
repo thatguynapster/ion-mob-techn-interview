@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { getPage } from 'next-page-tester';
 import { screen, fireEvent, waitForElementToBeRemoved } from '@testing-library/react';
 import loginMachine from '../../stateMachines/loginStateMachine'
