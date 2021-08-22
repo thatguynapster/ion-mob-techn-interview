@@ -13,52 +13,27 @@ export const Login: FC = () => {
 
   const [email, setEmail] = useState<string>('')
   const [userPass, setUserPass] = useState<string>('')
-  const [errorMessage, setErrorMessage] = useState<string>('')
 
   const _handleLogin = async () => {
+    console.log('logging in...')
     try {
       send('LOAD')
       const { error } = await supabase.auth.signIn({ email })
       if (error) {
+        console.log('failed')
         send('FAIL')
-        setErrorMessage(error.message)
         // toast.error(error)
         throw error
       }
+      console.log('success')
       send('SUCCESS')
       toast.success('Check your email for the login link!')
     } catch (error) {
       send('FAIL')
-      setErrorMessage(error.error_description || error.message)
-      // toast.error(error.error_description || error.message)
     } finally {
       send('DONE')
     }
   }
-
-  useEffect(() => {
-    console.log(GLOBAL_OBJ)
-    let userData = JSON.parse(String(localStorage.getItem('supabase.auth.token')))
-    console.log(userData)
-    if (userData?.expiresAt * 1000 > new Date().getTime()) {
-      console.log('user logged in')
-      AUTH_LOGIN({
-        isLoggedIn: true,
-        token: userData.currentSession.access_token,
-        data: {
-          user_id: userData.currentSession.user.id,
-          email: userData.currentSession.user.email,
-          phone_number: userData.currentSession.user.phone
-        }
-      })
-    } else {
-      console.log('user not logged in/session expired')
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(GLOBAL_OBJ)
-  }, [GLOBAL_OBJ])
 
   return (
     <>
@@ -69,7 +44,7 @@ export const Login: FC = () => {
             autoComplete="false"
             className="w-full max-w-lg bg-white rounded-lg p-4 text-center space-y-8"
           >
-            <h1 className="font-bold text-2xl text-green-900">Sign in</h1>
+            <h1 className="font-bold text-2xl text-green-900">Sign In</h1>
 
             <div className="flex flex-col space-y-3">
               <div className="relative flex flex-col box-border w-full p-0 font-medium text-xs">
@@ -91,23 +66,9 @@ export const Login: FC = () => {
                 />
               </div>
               <div className="relative flex flex-col box-border w-full p-0 font-medium text-xs">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-500 sm:text-sm">
-                    <LockClosedIcon className="w-4 h-4" />
-                  </span>
-                </div>
-                <input
-                  id="userPass"
-                  className="border-solid border focus:ring-2 outline-none border-green-100 rounded-lg py-3 pl-9 pr-12  text-sm w-full"
-                  value={userPass}
-                  type="password"
-                  placeholder="Password"
-                  onChange={(ev: ChangeEvent<HTMLInputElement>) => {
-                    send('START')
-                    setUserPass(ev.target.value)
-                  }}
-                />
-                {current.matches('failure') && <em className="text-red-500">{errorMessage}</em>}
+                {current.matches('failure') && (
+                  <em className="text-red-500">Invalid email provided</em>
+                )}
               </div>
             </div>
 
@@ -118,6 +79,7 @@ export const Login: FC = () => {
                 ev.preventDefault()
                 _handleLogin()
               }}
+              data-testid="loginButton"
             >
               {current.matches('loading') && (
                 <svg
@@ -125,6 +87,7 @@ export const Login: FC = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
+                  data-testid="loadingIcon"
                 >
                   <circle
                     className="opacity-25"
@@ -147,7 +110,7 @@ export const Login: FC = () => {
         )}
 
         {current.matches('success') && (
-          <div className="w-full max-w-lg bg-white rounded-lg p-4 text-center space-y-8 flex flex-col justify-center items-center">
+          <div  data-testid="successCard" className="w-full max-w-lg bg-white rounded-lg p-4 text-center space-y-8 flex flex-col justify-center items-center">
             <div className="bg-green-200 p-6 rounded-full">
               <CheckIcon className="w-8 h-8" />
             </div>

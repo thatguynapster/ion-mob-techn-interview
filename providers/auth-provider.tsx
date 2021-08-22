@@ -56,7 +56,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
         throw 'Cookies not set'
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       setReady(true)
     }
   }
